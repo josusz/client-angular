@@ -1,3 +1,21 @@
+<div class="row">
+  <div class="col-8 m-auto">
+    <form [formGroup]="formGroupClient">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" formControlName="name" class="form-control" id="name" placeholder="Nome">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" formControlName="email" class="form-control" id="email" placeholder="E-mail">
+      </div>
+      <div class="mb-3 d-flex justify-content-end">
+        <button class="btn btn-success" (click)="save()">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <table class="table table-striped">
   <thead>
     <tr>

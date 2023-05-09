@@ -1,6 +1,7 @@
 import { ClientService } from './../client.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../client';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-clients',
@@ -9,8 +10,16 @@ import { Client } from '../client';
 })
 export class ClientsComponent implements OnInit{
   clients: Client[] = [];
+  formGroupClient: FormGroup;
 
-  constructor(private ClientService: ClientService){}
+  constructor(private ClientService: ClientService,   private formBuilder: FormBuilder){
+    this.formGroupClient = formBuilder.group({
+      id: [''],
+      name: [''],
+      email: ['']
+    });
+  }
+
   ngOnInit(): void {
     this.loadClients();
   }
@@ -21,5 +30,15 @@ export class ClientsComponent implements OnInit{
         error: (msg) => console.log("Erro ao chamar o endpoint" + msg)
       }
     )
+  }
+
+  save(){
+    this.ClientService.save(this.formGroupClient.value).subscribe(
+    {
+      next: data => {
+        this.clients.push(data);
+        this.formGroupClient.reset();
+      }
+    })
   }
 }
