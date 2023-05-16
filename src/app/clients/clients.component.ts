@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ClientsComponent implements OnInit{
   clients: Client[] = [];
   formGroupClient: FormGroup;
+  isEditing: boolean = false;
 
   constructor(private ClientService: ClientService,   private formBuilder: FormBuilder){
     this.formGroupClient = formBuilder.group({
@@ -33,12 +34,32 @@ export class ClientsComponent implements OnInit{
   }
 
   save(){
-    this.ClientService.save(this.formGroupClient.value).subscribe(
-    {
-      next: data => {
-        this.clients.push(data);
-        this.formGroupClient.reset();
-      }
-    })
+    if(this.isEditing){
+      this.ClientService.update(this.formGroupClient.value).subscribe({
+        next: () => {this.loadClients();
+          this.formGroupClient.reset();
+          this.isEditing = false;
+        }
+      });
+    }
+    else{
+      this.ClientService.save(this.formGroupClient.value).subscribe({
+        next: data => {
+          this.clients.push(data);
+          this.formGroupClient.reset();
+        }
+      });
+    }
+  }
+
+  remove(client: Client): void{
+    this.ClientService.remove(client).subscribe({
+      next: () => this.loadClients()
+    });
+  }
+
+  edit(client: Client): void{
+    this.formGroupClient.setValue(client);
+    this.isEditing = true;
   }
 }

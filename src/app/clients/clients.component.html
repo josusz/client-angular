@@ -15,13 +15,13 @@
     </form>
   </div>
 </div>
-
 <table class="table table-striped">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">E-mail</th>
+      <th class="d-flex justify-content-end" scope="col">Opções</th>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +29,10 @@
       <th scope="row">{{client.id}}</th>
       <td>{{client.name}}</td>
       <td>{{client.email}}</td>
+      <td class="d-flex justify-content-end">
+        <button class="btn btn-danger me-1" (click)="remove(client)">Excluir</button>
+        <button class="btn btn-primary" (click)="edit(client)">Editar</button>
+      </td>
     </tr>
   </tbody>
 </table>

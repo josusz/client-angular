@@ -12,18 +12,13 @@
     },
     {
       "id": 3,
-      "name": "Fernanda Souza",
+      "name": "Fernanda Lapa",
       "email": "fernanda@gmail.com"
     },
     {
       "id": 4,
       "name": "Josué",
       "email": "josue.chagas@fatec.sp.gov.br"
-    },
-    {
-      "id": 5,
-      "name": "Zé da Manga",
-      "email": "ze.manga@fatec.sp.gov.br"
     }
   ]
 }
